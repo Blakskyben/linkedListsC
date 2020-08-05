@@ -56,23 +56,56 @@ int showLL(struct LL* linkedList)
     }
 }
 
-void change(int value, int newVal)
-{
-
+void change(struct LL * linkedList, int value, int newVal)
+{ 
+    struct Node* node = linkedList->head;
+    for (int i = 0; i < linkedList->size; i++)
+    {
+        if (node->value == value)
+        {
+            node->value = newVal;
+        } 
+        node = node->next;
+    } 
 }
 
-void removeVal(int value)
+void removeVal(struct LL * linkedList, int index)
 {
+    struct Node* node2;
+    struct Node* node1 = linkedList->head;
+    int counter=0;
+    int counter1=0;
+    while (counter < linkedList->size)
+    {
+        showLL(linkedList);
+        if (counter1==index - 1)
+        {
+            node2=node1->next;
+            node1->next=node1->next->next;
+            free(node2);
+            linkedList->size--;
+            break;
 
+        }
+        node1=node1->next;
+        counter1++;
+        counter++;
+    }   
 }
 
 
 int main()
 {
     struct LL* ll = createLL();
-    add(ll,1022);
+    add(ll,1045722);
+    add(ll, 110);
+    add(ll, 110);
     add(ll,102);
-    add(ll,110);
-    add(ll,5);
+    add(ll,13);
+    add(ll, 110);
+    add(ll, 110);
+    //change(ll, 110, 11100);
+    //showLL(ll);
+    removeVal(ll, 3);
     showLL(ll);
 }
